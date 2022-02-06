@@ -8,9 +8,9 @@ def home():
   return render_template('home.html')
  
 
-@main.route('login' , methods = ['GET','POST'])
+@main.route('/login' , methods = ['GET','POST'])
 def login():
-  return render_template ('login.html')
+  return  render_template ('login.html')
 
 
   

@@ -7,6 +7,7 @@ class Config:
   Defining the configuration parent class
   """
   SECRET_KEY = os.environ.get('SECRET_KEY')
+  SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://username:access@localhost/putotrial>'
 
 class prodConfig(Config):
   pass

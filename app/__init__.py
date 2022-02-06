@@ -1,6 +1,9 @@
 from flask import Flask
 from config import config_options
+from flask_sqlalchemy import SQLAlchemy
 
+# creating the database instance
+db = SQLAlchemy()
 
 def create_app(config_name):
   # Creating the app instance
@@ -13,5 +16,7 @@ def create_app(config_name):
   from .main import main as main_blueprint
   app.register_blueprint(main_blueprint)
   
+  # Initializing flask extenssions
+  db.init_app(app)
  
   return app
