@@ -5,6 +5,7 @@ from flask import render_template
 
 @main.route('/', methods = ['GET','POST'])
 def home():
-  return "Home is where the heart belongs"
+  return render_template('base.html')
+ 
   
 
