@@ -1,6 +1,7 @@
 from crypt import methods
 from . import main
 from flask import render_template 
+from .forms import LoginForm , SignUpForm
 
 
 @main.route('/', methods = ['GET','POST'])
@@ -10,7 +11,9 @@ def home():
 
 @main.route('/login' , methods = ['GET','POST'])
 def login():
-  return  render_template ('login.html')
+  form = LoginForm()
+
+  return  render_template ('login.html', form = form)
 
 
   
