@@ -1,11 +1,20 @@
 from . import main
+from app import db, login_manager
 from flask import render_template , redirect , url_for
 from .forms import LoginForm , SignUpForm
 from werkzeug.security import check_password_hash, generate_password_hash
-from models import User
+from ..models import User
 from flask_login import login_user
 
 
+# defining the login manager function that takes in a user id
+@login_manager.user_loader
+def load_user(user_id):
+  return User.query.get(int(user_id))
+
+@main.before_app_first_request
+def create_all():
+  db.create_all()
 
 @main.route('/', methods = ['GET','POST'])
 def home():
@@ -38,5 +47,9 @@ def signup():
   form = SignUpForm()
   return render_template('signup.html', form = form)
 
-  
+
+@main.route('/pitches' , methods =['GET', 'POST'])
+def pitches():
+
+  return render_template('pitches.html')
 

@@ -13,6 +13,7 @@ login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'login'
 
+
 def create_app(config_name):
   # Creating the app instance
   app = Flask(__name__)
