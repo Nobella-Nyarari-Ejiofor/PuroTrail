@@ -1,4 +1,21 @@
-<form method = "POST" action="{{url_for(form)}} ">
+{% extends 'base.html'%}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content%}
+   <div class="container-fluid">
+     {{wtf.quick_form(form)}}
+   </div>
+
+{% endblock %}
+
+
+
+<!-- <form method = "POST" action="{{url_for('main.login')}} ">
+  {{form.csrf_token}}
   {{form.username.label}}
+  <br>
   {{form.username}}
-</form>
+  <br>
+  {{form.password.label}}
+  <br>
+  {{form.password}}
+</form> -->

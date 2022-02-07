@@ -13,10 +13,10 @@ class User(db.Model):
 class Role(db.Model) :
   __tablename__ = 'roles'
   id = db.Column(db.Integer , primary_key =True)
-  username = db.Column(db.String(255))
+  username = db.Column(db.String(255), unique = True)
   users = db.relationship('User' , backref = 'role' , lazy = "dynamic")
   
-  
+
   def __repr__(self):
     return f'User {self.name}'
 
