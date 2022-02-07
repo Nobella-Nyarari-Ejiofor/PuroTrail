@@ -2,7 +2,9 @@
 {% import "bootstrap/wtf.html" as wtf %}
 {% block content%}
    <div class="container-fluid">
-     {{wtf.quick_form(form)}}
+     <forms action = '/login'>
+      {{wtf.quick_form(form)}}
+    </forms>
    </div>
 
 {% endblock %}

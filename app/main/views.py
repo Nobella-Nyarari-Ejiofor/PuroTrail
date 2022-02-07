@@ -45,6 +45,15 @@ def login():
 @main.route('/signup' , methods =['GET', 'POST'])
 def signup():
   form = SignUpForm()
+  if form.validate_on_submit():
+    first_name = form.first_name.data
+    last_name = form.last_name.data
+    username = form.username.data
+    email = form.email.data
+    
+
+  
+
   return render_template('signup.html', form = form)
 
 
