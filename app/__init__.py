@@ -3,10 +3,12 @@ from config import config_options , SECRET_KEY
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
+from flask_mail import Mail
 
 # creating the database and bootstrap instance
 db = SQLAlchemy()
 bootstrap = Bootstrap()
+mail = Mail()
 
 # Initializing the login manager and assigning it to the view and protection.strong will monitor the changes in a user's request header and log the user out.
 login_manager = LoginManager()
@@ -31,4 +33,6 @@ def create_app(config_name):
   db.init_app(app)
   bootstrap.init_app(app)
   login_manager.init_app(app)
+  mail.init_app(app)
+  
   return app

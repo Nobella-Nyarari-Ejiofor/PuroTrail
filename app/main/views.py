@@ -1,3 +1,4 @@
+
 from . import main
 from app import db, login_manager
 from flask import render_template , redirect , url_for , flash 
@@ -5,6 +6,8 @@ from .forms import LoginForm , SignUpForm
 from werkzeug.security import check_password_hash, generate_password_hash
 from ..models import User
 from flask_login import login_user
+from ..email import mail_message
+
 
 
 @main.before_app_first_request
@@ -64,6 +67,9 @@ def signup():
     db.session.add(new_user)
     # Sending new_user to the database
     db.session.commit()
+
+    mail_message("Welcome to watchlist","email/welcome_user",new_user.email,new_user=new_user)
+
     flash("Your account has been  created successfuly")
     return redirect(url_for('main.login'))
   return render_template('signup.html', form = form)
@@ -73,4 +79,6 @@ def signup():
 def pitches():
 
   return render_template('pitches.html')
+
+
 
