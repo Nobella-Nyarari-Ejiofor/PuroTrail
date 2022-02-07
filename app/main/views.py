@@ -30,7 +30,7 @@ def login():
     # if user exists
     if user:
       # Compare the passwords.
-      if check_password_hash(user.password , form.password.data):
+      if check_password_hash(user.password,form.password.data):
         # /loging the user in
         login_user(user)
         # redirecting to the pitch page
@@ -50,7 +50,20 @@ def signup():
     last_name = form.last_name.data
     username = form.username.data
     email = form.email.data
+    password = form.password.data
     
+    # Creating a hashed password
+    hashed_password = generate_password_hash(password, method= 'sha256')
+   
+    #  Creating a new_user with the properties above matched to each property of the class
+    new_user = User(first_name = first_name ,last_name = last_name ,password = hashed_password , email =email , username =username)
+
+    # Adding to the database
+    db.session.add(new_user)
+    # Sending new_user to the database
+    db.session.commit()
+    print("Your account has been  created successfuly")
+    return redirect(url_for('main.login'))
 
   
 

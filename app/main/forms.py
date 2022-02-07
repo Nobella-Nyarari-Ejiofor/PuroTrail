@@ -14,7 +14,7 @@ class SignUpForm(UserMixin,FlaskForm):
   last_name = StringField('last_name' , validators= [InputRequired(), Length (min =5 ,max =15)])
   username = StringField('username' , validators = [InputRequired() , Length(min= 4 , max =15)])
   password = StringField('username' , validators = [InputRequired() , Length(min= 4 , max =15)])
-  email = StringField('email' , validators= [InputRequired(), Email(message = "Invalid Email") , Length(min =5 , max=15)])
+  email = StringField('email' , validators= [InputRequired(), Email(message = "Invalid Email") , Length(min =5 , max=100)])
   register = SubmitField('Register')
 
 
