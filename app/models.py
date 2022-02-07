@@ -1,6 +1,7 @@
 from . import db
+from flask_login import UserMixin
 
-class User(db.Model):
+class User(UserMixin,db.Model):
   __tablename__ = 'users'
   id = db.Column(db.Integer, primary_key =True)
   first_name = db.Column(db.String(255))
@@ -18,7 +19,7 @@ class User(db.Model):
 
 
 # Class for the role of the user
-class Role(db.Model) :
+class Role(UserMixin,db.Model) :
   __tablename__ = 'roles'
   id = db.Column(db.Integer , primary_key =True)
   username = db.Column(db.String(255), unique = True)
