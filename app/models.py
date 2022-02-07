@@ -9,6 +9,9 @@ class User(db.Model):
   role_id = db.Column(db.Integer , db.ForeignKey('roles.id'))
   password = db.Column(db.String(255))
   email = db.Column(db.String(255))
+  
+  def is_active(self):
+    return True
 
   def __repr__(self):
         return f'User {self.username}'

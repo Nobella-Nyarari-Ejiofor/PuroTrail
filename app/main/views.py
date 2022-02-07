@@ -1,6 +1,6 @@
 from . import main
 from app import db, login_manager
-from flask import render_template , redirect , url_for
+from flask import render_template , redirect , url_for , flash
 from .forms import LoginForm , SignUpForm
 from werkzeug.security import check_password_hash, generate_password_hash
 from ..models import User
@@ -10,7 +10,7 @@ from flask_login import login_user
 # defining the login manager function that takes in a user id
 @login_manager.user_loader
 def load_user(user_id):
-  return User.query.get(int(user_id))
+  return User.query.get(int(user_id)).first()
 
 @main.before_app_first_request
 def create_all():
@@ -26,7 +26,7 @@ def login():
   form = LoginForm()
   # Check validation of the form
   if form.validate_on_submit():
-    user = User.query.filter_by(username = form.username.data)
+    user = User.query.filter_by(username = form.username.data).first()
     # if user exists
     if user:
       # Compare the passwords.
@@ -62,11 +62,8 @@ def signup():
     db.session.add(new_user)
     # Sending new_user to the database
     db.session.commit()
-    print("Your account has been  created successfuly")
+    flash("Your account has been  created successfuly")
     return redirect(url_for('main.login'))
-
-  
-
   return render_template('signup.html', form = form)
 
 
