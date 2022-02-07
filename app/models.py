@@ -29,3 +29,25 @@ class Role(UserMixin,db.Model) :
   def __repr__(self):
     return f'User {self.name}'
 
+#class for the pitch
+class Pitch(db.Model):
+  __tablename__ = 'pitches '
+  id = db.Column(db.Integer , primary_key = True)
+  pitchwords = db.Column(db.String(500))
+  date = db.Column(db.DateTime )
+  vote = db.Column(db.Boolean , default=False, server_default="false")
+  comment_id = db.Column(db.Integer , db.ForeignKey('comments.id'))
+  category_id = db.Column(db.Integer , db.ForeignKey('categorys.id'))
+
+class Comment(db.Model):
+  __tablename__ = 'comments'
+  id= db.Column(db.Integer , primary_key = True)
+  commentwords = db.Column(db.String(500))
+  pitches = db.relationship('Pitch' , backref = 'comment' , lazy = "dynamic")
+
+class Category(db.Model):
+  __tablename__= 'categorys'
+  id = db.Column(db.Integer , primary_key= True)
+  categorywords = db.Column(db.String(255))
+  pitches = db.relationship('Pitch', backref = 'category', lazy = "dynamic")
+  

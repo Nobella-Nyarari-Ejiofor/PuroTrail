@@ -1,6 +1,6 @@
 from app import create_app,db
 from flask_script import Manager,Server
-from app.models import User , Role
+from app.models import User , Role , Category , Comment , Pitch
 from flask_migrate import Migrate, MigrateCommand
 
 # Creating app instance
@@ -19,7 +19,7 @@ def make_shell_context():
   """
   A function that allows to pass in our properties to our shell
   """
-  return dict(app=app , db=db , User=User , Role = Role)
+  return dict(app=app , db=db , User=User , Role = Role , Pitch = Pitch , Category = Category , Comment =Comment)
 
 # Running the app
 if __name__ == "__main__":

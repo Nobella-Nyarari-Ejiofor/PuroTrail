@@ -68,7 +68,7 @@ def signup():
     # Sending new_user to the database
     db.session.commit()
 
-    mail_message("Welcome to watchlist","email/welcome_user",new_user.email,new_user=new_user)
+    mail_message("Welcome to PuroTrail","email/welcome_user",new_user.email,new_user=new_user)
 
     flash("Your account has been  created successfuly")
     return redirect(url_for('main.login'))
