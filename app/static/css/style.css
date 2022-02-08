@@ -3,19 +3,47 @@
 #puro{
  font-family: 'Rowdies', cursive;
 
+
 }
 #trail{
   font-family: 'Bebas Neue', cursive;
+
 }
-.home{
-  background-image: url(images/person1.jpeg);
-  background-repeat: no-repeat;
+.categories ul li a{
+  color: black;
 }
-/* @media screen  and (min-width: 600px) {
- 
-  .navbar-nav{
-  position: absolute;
-  top: 0;
-  right: 0;
-  }
-} */
+.categories ul li a{
+  text-decoration: none; 
+}
+.categories ul li a:hover{
+  font-size:30px;
+  font-size-adjust: 20px;
+}
+.navbar-nav li a {
+  color: white;
+}
+#dropmenu li a{
+  color: black;
+}
+.content-footer{
+  color: white;
+}
+
+.form-con{
+  width: 40rem;
+}
+.form-con1{
+  width: 50rem;
+}
+.postbtn{
+  display: block;
+  margin-left: 30rem;
+  
+}
+.postbtn a{
+  color: white;
+  text-decoration: none;
+}
+img{
+  width: auto;
+}

@@ -8,8 +8,10 @@ class User(UserMixin,db.Model):
   last_name = db.Column(db.String(255))
   username = db.Column(db.String(255))
   role_id = db.Column(db.Integer , db.ForeignKey('roles.id'))
+  pitches_id = db.Column(db.Integer, db.ForeignKey('pitches.id'))
   password = db.Column(db.String(255))
   email = db.Column(db.String(255))
+  
   
   def is_active(self):
     return True
@@ -38,6 +40,7 @@ class Pitch(db.Model):
   vote = db.Column(db.Boolean , default=False, server_default="false")
   comment_id = db.Column(db.Integer , db.ForeignKey('comments.id'))
   category_id = db.Column(db.Integer , db.ForeignKey('categorys.id'))
+  users = db.relationship('User' , backref = 'pitch' , lazy = "dynamic")
 
   def __repr__(self):
     return f'User {self.name}'

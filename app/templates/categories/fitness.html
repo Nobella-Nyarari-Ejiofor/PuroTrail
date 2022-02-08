@@ -1,0 +1,52 @@
+{% extends 'base.html' %} 
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %} 
+ <!-- row for pitches in categories -->
+ <div class="row mt-3">
+   <div class="card" style="width: auto ;">
+     <div class="card-body">
+       <h5 class="card-title text-center">FITNESS PITCH</h5>
+       <!-- first pitch -->
+          <div class="card">
+            <div class="card-body">
+              The race is for the swift and sweaty
+            </div>
+            <div class="card-footer">
+              <div class="comment-form">
+                {{wtf.quick_form(form )}}
+              </div>
+
+            </div>
+          </div>   
+          <!-- first pitch -->
+          <div class="card mt-3">
+            <div class="card-body">
+              No pain, no gain.
+            </div>
+            <div class="card-footer">
+
+            </div>
+          </div>  
+          <!-- first pitch -->
+          <div class="card mt-3">
+            <div class="card-body">
+              Only the disciplined in life are free. If you are indisciplined, you are a slave to your desires.
+            </div>
+            <div class="card-footer">
+
+            </div>
+          </div>  
+          <!-- first pitch -->
+          <div class="card mt-3">
+            <div class="card-body">
+               If you wait on motivation to work out , you will never be fit . Fitness comes with consistency.
+            </div>
+            <div class="card-footer">
+
+            </div>
+          </div>   
+     </div>
+   </div>
+  </div>
+  {% endblock %}

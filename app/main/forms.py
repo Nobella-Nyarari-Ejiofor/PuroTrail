@@ -20,3 +20,7 @@ class SignUpForm(FlaskForm):
 class PitchesForm(FlaskForm):
    pitch_words = StringField('Write your Pitch' , validators = [InputRequired(), Length(min = 50, max =200)])
    post = SubmitField('post pitch')
+
+class CommentsForm(FlaskForm):
+  comment_words = StringField('comment',validators = [InputRequired(), Length(min = 5 , max =15)])
+  submit = SubmitField('submit')

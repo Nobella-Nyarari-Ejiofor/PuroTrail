@@ -2,9 +2,9 @@
 from . import main
 from app import db, login_manager
 from flask import render_template , redirect , url_for , flash 
-from .forms import LoginForm , SignUpForm , PitchesForm
+from .forms import LoginForm , SignUpForm , PitchesForm , CommentsForm
 from werkzeug.security import check_password_hash, generate_password_hash
-from ..models import User , Pitch , Category
+from ..models import User , Pitch , Category , Comment
 from flask_login import login_user
 from ..email import mail_message
 
@@ -82,16 +82,44 @@ def signup():
 @main.route('/pitches' , methods =['GET', 'POST'])
 def pitches():
   form = PitchesForm()
+  commentsform = CommentsForm()
   posted_pitch = form.pitch_words.data
+  comment = commentsform.comment_words.data
   summary_posted_pitches = Pitch( pitchwords = posted_pitch)
-
+  summary_comments = Comment(commentwords = comment)
+  
   # Adding pitch to the database
-  db.session.add(summary_posted_pitches)
+  db.session.add_all([summary_posted_pitches, summary_comments])
   # commiting to the database
   db.session.commit()
-  return render_template('pitches.html' , form = form)
+  # pitchedarray = []
+
+  # if summary_posted_pitches:
+  #   minipitch = summary_posted_pitches
+  #   pitchedarray.append(minipitch)
+  
+  return render_template('pitches.html' , form =form , commentsform =commentsform)
 
 @main.route('/otherpitches' , methods =['GET','POST'])
 def otherpitches():
+
   return render_template('otherpitches.html')
+
+@main.route('/fitness')
+def fitness():
+  form = CommentsForm()
+  return render_template('categories/fitness.html', form = form)
+
+@main.route('/pickup')
+def pickup():
+  return render_template('categories/pickup.html')
+
+@main.route ('/product')
+def product():
+  return render_template('categories/product.html')
+
+@main.route('/interview')
+def interview():
+  return render_template ('categories/interview.html')
+
 
