@@ -2,9 +2,9 @@
 from . import main
 from app import db, login_manager
 from flask import render_template , redirect , url_for , flash 
-from .forms import LoginForm , SignUpForm
+from .forms import LoginForm , SignUpForm , PitchesForm
 from werkzeug.security import check_password_hash, generate_password_hash
-from ..models import User
+from ..models import User , Pitch
 from flask_login import login_user
 from ..email import mail_message
 
@@ -18,6 +18,10 @@ def create_all():
 @login_manager.user_loader
 def load_user(user_id):
   return User.query.get(int(user_id))
+
+# @login_manager.pitches_loader
+# def load_pitches(pitch_id):
+#   return Pitch.query.get(int(pitch_id))
 
 
 @main.route('/', methods = ['GET','POST'])
@@ -77,8 +81,15 @@ def signup():
 
 @main.route('/pitches' , methods =['GET', 'POST'])
 def pitches():
+  form = PitchesForm()
+  posted_pitch = form.pitch_words.data
+  summary_posted_pitches = Pitch( pitchwords = posted_pitch)
 
-  return render_template('pitches.html')
+  # Adding pitch to the database
+  db.session.add(summary_posted_pitches)
+  # commiting to the database
+  db.session.commit()
+  return render_template('pitches.html' , form = form)
 
 
 

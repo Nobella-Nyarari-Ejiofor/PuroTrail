@@ -17,4 +17,6 @@ class SignUpForm(FlaskForm):
   email = StringField('email' , validators= [InputRequired(), Email(message = "Invalid Email") , Length(min =5 , max=100)])
   register = SubmitField('Register')
 
-
+class PitchesForm(FlaskForm):
+   pitch_words = StringField('Write your Pitch' , validators = [InputRequired(), Length(min = 50, max =200)])
+   post = SubmitField('post pitch')
