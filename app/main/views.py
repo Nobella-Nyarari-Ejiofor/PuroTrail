@@ -122,4 +122,8 @@ def product():
 def interview():
   return render_template ('categories/interview.html')
 
+@main.route('/profile/<int:id>')
+def profileview(id):
+  userpitches = Pitch.query.filter_by(user_id=id).all()
+  return render_template('profile.html', userpitches =userpitches)
 

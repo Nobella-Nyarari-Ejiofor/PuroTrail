@@ -1,3 +1,4 @@
+from PuroTrail.app.main.views import pitches
 from . import db
 from flask_login import UserMixin
 
@@ -8,10 +9,9 @@ class User(UserMixin,db.Model):
   last_name = db.Column(db.String(255))
   username = db.Column(db.String(255))
   role_id = db.Column(db.Integer , db.ForeignKey('roles.id'))
-  pitches_id = db.Column(db.Integer, db.ForeignKey('pitches.id'))
   password = db.Column(db.String(255))
   email = db.Column(db.String(255))
-  
+  pitches = db.relationship('Pitch' , backref = 'user' , lazy = "dynamic")
   
   def is_active(self):
     return True
@@ -40,7 +40,7 @@ class Pitch(db.Model):
   vote = db.Column(db.Boolean , default=False, server_default="false")
   comment_id = db.Column(db.Integer , db.ForeignKey('comments.id'))
   category_id = db.Column(db.Integer , db.ForeignKey('categorys.id'))
-  users = db.relationship('User' , backref = 'pitch' , lazy = "dynamic")
+  users_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
   def __repr__(self):
     return f'User {self.name}'
