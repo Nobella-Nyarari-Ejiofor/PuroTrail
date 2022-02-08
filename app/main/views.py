@@ -4,7 +4,7 @@ from app import db, login_manager
 from flask import render_template , redirect , url_for , flash 
 from .forms import LoginForm , SignUpForm , PitchesForm
 from werkzeug.security import check_password_hash, generate_password_hash
-from ..models import User , Pitch
+from ..models import User , Pitch , Category
 from flask_login import login_user
 from ..email import mail_message
 
@@ -91,5 +91,7 @@ def pitches():
   db.session.commit()
   return render_template('pitches.html' , form = form)
 
-
+@main.route('/otherpitches' , methods =['GET','POST'])
+def otherpitches():
+  return render_template('otherpitches.html')
 
