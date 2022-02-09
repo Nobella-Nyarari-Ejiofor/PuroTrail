@@ -1,5 +1,3 @@
-
-from unicodedata import category
 from . import main
 from app import db, login_manager
 from flask import render_template , redirect , url_for , flash , abort
@@ -27,7 +25,8 @@ def load_user(user_id):
 
 @main.route('/', methods = ['GET','POST'])
 def home():
-  return render_template('home.html')
+  homepitches = Pitch.query.all()
+  return render_template('home.html', homepitches = homepitches)
  
 
 @main.route('/login' , methods = ['GET','POST'])
@@ -101,16 +100,11 @@ def pitches():
    db.session.add(summary_posted_pitches)
   # commiting to the database
    db.session.commit()
-
+ 
   return render_template('pitches.html' , form =form )
 
 
 #  commentsform = CommentsForm(), comment = commentsform.comment_words.data,  summary_comments = Comment(commentwords = comment, )
-
-@main.route('/fitness')
-def fitness():
-  form = CommentsForm()
-  return render_template('categories/fitness.html', form = form)
 
 @main.route('/category/<id>')
 @login_required

@@ -12,7 +12,7 @@
 <body>
   
   <!-- Section for the navbar -->
-  <nav class="navbar navbar-expand-lg bg-dark text-light fixed-top">
+  <nav class="navbar navbar-expand-lg bg-dark text-light ">
     <div class="container-fluid ">
     <a class="navbar-brand" style="color: white;"href="#"><span id="puro">Puro</span><br><span id ="trail">TRAIL</span></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,12 +69,34 @@
         {% endblock %}
       </div>
     </div>
+      
+   {%if homepitches%}
+     <div class="row">
+         <div class="col-md-6">
+            <div >
+               <img class ="img-fluid" src="static/images/pitcher2.png" alt="">
+            </div>
+         </div>
+         <div class="col-md-6">
+           <h3 class= "text-center">PITCHES</h3>
+            {% for homepitch in homepitches%}
+               <div class="card mt-3 m-auto"style= "width: 50rem;">
+                 <div class="card-body" >
+                   {{homepitch.pitchwords}}
+                 </div>
+                </div>
+             {% endfor %}
+         
+      
+            </div>
+      {% endif %}
+ 
+      </div>
+       
+    </div>
   </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
 <footer class= "bg-dark text_light bottom-fixed">
-  <div class="row container">
+  <div class="container-fluid">
      <div class="content-footer text-center">
       <h3><a class="navbar-brand" style="color: white;" href="#"><span id="puro">Puro</span><span id ="trail">TRAIL</span></a></h3>
       <p>©CopyRight </p>
