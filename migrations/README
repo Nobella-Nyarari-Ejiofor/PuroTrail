@@ -1,4 +1,1 @@
 Generic single-database configuration.
-
-INSERT INTO categorys( id , categorywords)
-VALUES(1 , 'Pick up lines) , (2 , 'Fitness pitch') , (3 , 'Product pitch') , (4 , 'Promotion Pitch')

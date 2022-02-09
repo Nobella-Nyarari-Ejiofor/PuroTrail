@@ -31,7 +31,7 @@
               Settings
             </a>
             <ul class="dropdown-menu" id = "dropmenu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="{{url_for('main.pitches')}}">Profile</a></li>
+              <li><a class="dropdown-item" href="{{url_for('main.profileview',uname=current_user.uname)}}">Profile</a></li>
               
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Logout</a></li>
@@ -53,10 +53,10 @@
           </div>
           <div class="card-body categories">
             <ul class= "text-center  list-unstyled ">
-              <li class="lead pt-3"><a href ="{{url_for('main.pickup')}}">Pick up lines</a></li>
-              <li class="lead pt-3"><a href ="{{url_for('main.interview')}}">Interview Pitches</a></li>
-              <li class="lead pt-3"><a href ="{{url_for('main.fitness')}}">Fitness Pitches</a></li>
-              <li class="lead pt-3"><a href ="{{url_for('main.product')}}">Product Pitches</a></li>
+              <li class="lead pt-3"><a href ="/category/1">Pick up Lines</a></li>
+              <li class="lead pt-3"><a href ="/category/2">Product Pitches</a></li>
+              <li class="lead pt-3"><a href ="/category/3">Promotional Pitches</a></li>
+              <li class="lead pt-3"><a href ="/category/4">Interview Pitches</a></li>
             </ul>
           </div>
        </div>

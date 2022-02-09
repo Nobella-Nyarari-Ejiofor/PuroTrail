@@ -1,4 +1,4 @@
-from PuroTrail.app.main.views import pitches
+from sqlalchemy import ForeignKey
 from . import db
 from flask_login import UserMixin
 
@@ -38,9 +38,9 @@ class Pitch(db.Model):
   pitchwords = db.Column(db.String(500))
   date = db.Column(db.DateTime )
   vote = db.Column(db.Boolean , default=False, server_default="false")
-  comment_id = db.Column(db.Integer , db.ForeignKey('comments.id'))
-  category_id = db.Column(db.Integer , db.ForeignKey('categorys.id'))
-  users_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+  comment = db.relationship('Comment' , backref = 'pitch' , lazy = "dynamic")
+  user_id = db.Column(db.Integer , db.ForeignKey('users.id'))
+  category_id = db.Column(db.Integer, db.ForeignKey('categorys.id'))
 
   def __repr__(self):
     return f'User {self.name}'
@@ -49,11 +49,11 @@ class Comment(db.Model):
   __tablename__ = 'comments'
   id= db.Column(db.Integer , primary_key = True)
   commentwords = db.Column(db.String(500))
-  pitches = db.relationship('Pitch' , backref = 'comment' , lazy = "dynamic")
+  pitches_id = db.Column(db.Integer, db.ForeignKey('pitches.id'))
+  
 
 class Category(db.Model):
   __tablename__= 'categorys'
   id = db.Column(db.Integer , primary_key= True)
   categorywords = db.Column(db.String(255))
   pitches = db.relationship('Pitch', backref = 'category', lazy = "dynamic")
-  

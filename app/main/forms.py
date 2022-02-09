@@ -1,6 +1,5 @@
-import flask_login
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField,SubmitField
+from wtforms import StringField, TextAreaField,SubmitField, SelectField
 from wtforms.validators import InputRequired , Length , Email
 
 
@@ -17,10 +16,13 @@ class SignUpForm(FlaskForm):
   email = StringField('email' , validators= [InputRequired(), Email(message = "Invalid Email") , Length(min =5 , max=100)])
   register = SubmitField('Register')
 
+
 class PitchesForm(FlaskForm):
    pitch_words = StringField('Write your Pitch' , validators = [InputRequired(), Length(min = 50, max =200)])
+   category_field = SelectField("Category", choices =[(1,'Pickup Line'),(2,'Product Pitch'),(3,'Promotional Pitch'),(4,'Interview')],validators=[InputRequired()])
    post = SubmitField('post pitch')
 
 class CommentsForm(FlaskForm):
   comment_words = StringField('comment',validators = [InputRequired(), Length(min = 5 , max =15)])
   submit = SubmitField('submit')
+  

@@ -1,11 +1,12 @@
 
+from unicodedata import category
 from . import main
 from app import db, login_manager
-from flask import render_template , redirect , url_for , flash 
+from flask import render_template , redirect , url_for , flash , abort
 from .forms import LoginForm , SignUpForm , PitchesForm , CommentsForm
 from werkzeug.security import check_password_hash, generate_password_hash
 from ..models import User , Pitch , Category , Comment
-from flask_login import login_user
+from flask_login import login_user , login_required , current_user
 from ..email import mail_message
 
 
@@ -79,51 +80,55 @@ def signup():
   return render_template('signup.html', form = form)
 
 
+
+
 @main.route('/pitches' , methods =['GET', 'POST'])
+
+@login_required
 def pitches():
+  """
+  A function that takes value from the pitches form and saves it to the database
+  """
   form = PitchesForm()
-  commentsform = CommentsForm()
-  posted_pitch = form.pitch_words.data
-  comment = commentsform.comment_words.data
-  summary_posted_pitches = Pitch( pitchwords = posted_pitch)
-  summary_comments = Comment(commentwords = comment)
   
+
+  if form.validate_on_submit():
+   posted_pitch = form.pitch_words.data
+   category_select = form.category_field.data
+   summary_posted_pitches = Pitch( pitchwords = posted_pitch , user_id = current_user.id , category_id = category_select)
+
   # Adding pitch to the database
-  db.session.add_all([summary_posted_pitches, summary_comments])
+   db.session.add(summary_posted_pitches)
   # commiting to the database
-  db.session.commit()
-  # pitchedarray = []
+   db.session.commit()
 
-  # if summary_posted_pitches:
-  #   minipitch = summary_posted_pitches
-  #   pitchedarray.append(minipitch)
-  
-  return render_template('pitches.html' , form =form , commentsform =commentsform)
+  return render_template('pitches.html' , form =form )
 
-@main.route('/otherpitches' , methods =['GET','POST'])
-def otherpitches():
 
-  return render_template('otherpitches.html')
+#  commentsform = CommentsForm(), comment = commentsform.comment_words.data,  summary_comments = Comment(commentwords = comment, )
 
 @main.route('/fitness')
 def fitness():
   form = CommentsForm()
   return render_template('categories/fitness.html', form = form)
 
-@main.route('/pickup')
-def pickup():
-  return render_template('categories/pickup.html')
+@main.route('/category/<id>')
+@login_required
+def pickup(id):
+  
+  category_specific = Category.query.filter_by(id = id).first() 
+  pitches = Pitch.query.filter_by(category = category_specific).all()
+ 
+  return render_template('categories.html', pitches = pitches)
 
-@main.route ('/product')
-def product():
-  return render_template('categories/product.html')
 
-@main.route('/interview')
-def interview():
-  return render_template ('categories/interview.html')
 
-@main.route('/profile/<int:id>')
-def profileview(id):
-  userpitches = Pitch.query.filter_by(user_id=id).all()
-  return render_template('profile.html', userpitches =userpitches)
-
+@main.route('/user/<uname>', methods = ['GET', 'POST'])
+@login_required
+def profileview(uname):
+  user = User.query.filter_by(username = uname).first()
+  pitches = Pitch.query.filter_by(user_id=id).all()
+  
+  if user is None:
+    abort(404)
+  return render_template('otherpitches.html', user = user , pitches = pitches)

@@ -13,7 +13,7 @@ mail = Mail()
 # Initializing the login manager and assigning it to the view and protection.strong will monitor the changes in a user's request header and log the user out.
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
-login_manager.login_view = 'login'
+login_manager.login_view = 'main.login'
 
 
 def create_app(config_name):
