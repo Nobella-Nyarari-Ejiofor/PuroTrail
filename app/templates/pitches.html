@@ -3,9 +3,11 @@
 {% block content %}
 
   <div class="container-fluid" ></div>
-     <div class="form-con pt-5 mt-5" style= "width: 100px;">
-     
+     <div class=" pt-5 mt-5" >
+     <form class="form-control" action="/pitches" method="POST">
       {{wtf.quick_form(form)}}
+     </form>
+      
       
      </div>
   </div>

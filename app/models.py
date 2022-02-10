@@ -1,4 +1,5 @@
 from sqlalchemy import ForeignKey
+import psycopg2 
 from . import db
 from flask_login import UserMixin
 

@@ -18,26 +18,34 @@ def create_all():
 def load_user(user_id):
   return User.query.get(int(user_id))
 
-# @login_manager.pitches_loader
-# def load_pitches(pitch_id):
-#   return Pitch.query.get(int(pitch_id))
-
 
 @main.route('/', methods = ['GET','POST'])
 def home():
+  """
+  A function that returns the home page for the application.
+
+  Args : Takes in the pitches from the database.
+
+  Kwargs: Returns the pitches for display in the database.
+  """
   homepitches = Pitch.query.all()
   return render_template('home.html', homepitches = homepitches)
  
 
 @main.route('/login' , methods = ['GET','POST'])
 def login():
+  """
+  A function that logs in a user to the web application.
+  """
   form = LoginForm()
   # Check validation of the form
   if form.validate_on_submit():
+    # Creates a user based on whether the name submitted in the form matches a name in the database
     user = User.query.filter_by(username = form.username.data).first()
   
     # if user exists
     if user:
+    
       # Compare the passwords.
       if check_password_hash(user.password,form.password.data):
         # /loging the user in
@@ -53,6 +61,9 @@ def login():
 
 @main.route('/signup' , methods =['GET', 'POST'])
 def signup():
+  """
+  A function that signs up a user into the application and saves their data into the database
+  """
   form = SignUpForm()
   if form.validate_on_submit():
     first_name = form.first_name.data
@@ -64,17 +75,17 @@ def signup():
     # Creating a hashed password
     hashed_password = generate_password_hash(password, method= 'sha256')
    
-    #  Creating a new_user with the properties above matched to each property of the class
+    #  Creating a new_user with the properties above matched to each property of the class in the database
     new_user = User(first_name = first_name ,last_name = last_name ,password = hashed_password , email =email , username =username)
 
     # Adding to the database
     db.session.add(new_user)
     # Sending new_user to the database
     db.session.commit()
+    print(new_user)
 
     mail_message("Welcome to PuroTrail","email/welcome_user",new_user.email,new_user=new_user)
 
-    flash("Your account has been  created successfuly")
     return redirect(url_for('main.login'))
   return render_template('signup.html', form = form)
 
@@ -82,7 +93,6 @@ def signup():
 
 
 @main.route('/pitches' , methods =['GET', 'POST'])
-
 @login_required
 def pitches():
   """
@@ -103,8 +113,20 @@ def pitches():
  
   return render_template('pitches.html' , form =form )
 
+# @main.route('/pitches/comments/<id>/')
+# def pitchescomments(id):
+#    specific_pitch = Pitch.query.filter_by(id=id).first()
+#    form = CommentsForm
+#    if form.validate_on_submit():
+#      pitch_comments = form.comment_words.data
+#      pitched_comments_class = Comment(commentwords = pitch_comments , id = current_user.id)
 
-#  commentsform = CommentsForm(), comment = commentsform.comment_words.data,  summary_comments = Comment(commentwords = comment, )
+#      db.session.add(pitched_comments_class)
+#      db.session.commit()
+
+# #      return render_template('comments.html', form = form)
+
+# #  commentsform = CommentsForm(), comment = commentsform.comment_words.data,  summary_comments = Comment(commentwords = comment, )
 
 @main.route('/category/<id>')
 @login_required
@@ -117,9 +139,12 @@ def pickup(id):
 
 
 
-@main.route('/user/<uname>', methods = ['GET', 'POST'])
+@main.route('/pitches/user/<uname>', methods = ['GET', 'POST'])
 @login_required
 def profileview(uname):
+  """
+  A function to display users profile information
+  """
   user = User.query.filter_by(username = uname).first()
   pitches = Pitch.query.filter_by(user_id=id).all()
   
