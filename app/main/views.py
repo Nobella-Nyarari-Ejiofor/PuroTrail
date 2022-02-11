@@ -1,3 +1,5 @@
+from crypt import methods
+from re import template
 from . import main
 from app import db, login_manager
 from flask import render_template , redirect , url_for , flash , abort
@@ -127,21 +129,26 @@ def pitches():
 # #      return render_template('comments.html', form = form)
 
 # # , ,  summary_comments = Comment(commentwords = comment, )
-@main.route('/pitches/comment')
-@login_required
+# @main.route('/pitches/comment')
+# @login_required
+# def comment():
+
+#   pitchy = Pitch.query.filter_by(id = id).first() 
+#   comments = Comment.query.filter_by(pitches_id = pitchy.id).all()
+#   return render_template('comments.html', comments = comments)
+
+@main.route('/comments', methods = ['GET','POST'])
 def comment():
+  form = CommentsForm()
+  if form.validate_on_submit():
+    comments = form.comment_words.data
+    commented = Comment(commentwords = comments)
 
-  pitchy = Pitch.query.filter_by(id = id).first() 
-  comments = Comment.query.filter_by(pitches_id = pitchy.id).all()
-  return render_template('comments.html', comments = comments)
+    db.session.add(commented)
+    db.session.commit()
+  return render_template('comments.html', form =form)
 
-
-
-#  if commentsform.validate_on_submit():
-#    comment = commentsform.comment_words.data
-
-
-    # return render_template('comments.html', form = commentsform, comment = comment)
+# eturn render_template('comments.html', form = commentsform, comment = comment)
  
 
 
