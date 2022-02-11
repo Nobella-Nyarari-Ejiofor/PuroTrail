@@ -20,6 +20,9 @@ def create_app(config_name):
   # Creating the app instance
   app = Flask(__name__)
 
+  app=create_app('production')
+
+
   # The secret key
   app.config['SECRET_KEY'] = SECRET_KEY
   # Creating the configurations for the app

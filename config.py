@@ -2,6 +2,7 @@ import os
 
 from instance.config import SECRET_KEY 
 
+
 class Config:
   """
   Defining the configuration parent class
@@ -17,7 +18,8 @@ class Config:
   MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
 
 class prodConfig(Config):
-  pass
+  SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
+
 
 class DevConfig(Config):
   DEBUG = True
