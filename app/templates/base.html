@@ -27,24 +27,9 @@
             <a class="nav-link" href="{{url_for('main.signup')}}">Sign up</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{url_for('main.signup')}}">Profile</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="{{url_for('main.logout')}}">Log Out</a>
           </li>
-          <!-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Settings
-            </a>
-            <ul class="dropdown-menu" id = "dropmenu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="{{url_for('main.profileview',uname=current_user.uname)}}">Profile</a></li>
-              
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Logout</a></li>
-            </ul>
-            
-          </li> -->
-         
+  
         </ul>
       
       </div>
@@ -92,9 +77,9 @@
                    {{homepitch.pitchwords}}
                  </div>
                 <div class= "card-footer">
-                  <button><a href = "/comments/{{homepitch.id}}">Comment</a></button>
-                  <img  class = "like"src="https://img.icons8.com/external-those-icons-fill-those-icons/24/000000/external-like-touch-gestures-those-icons-fill-those-icons.png"/><p>0</p>
-                  <img class ="dislike " src="https://img.icons8.com/external-those-icons-fill-those-icons/24/000000/external-dislike-touch-gestures-those-icons-fill-those-icons.png"/><p>0</p>
+                  <button class="btn btn-dark"><a href = "/comments/{{homepitch.id}}">Comment</a></button>
+                  <img  class = "like"src="https://img.icons8.com/external-those-icons-fill-those-icons/24/000000/external-like-touch-gestures-those-icons-fill-those-icons.png"/>0
+                  <img class ="dislike " src="https://img.icons8.com/external-those-icons-fill-those-icons/24/000000/external-dislike-touch-gestures-those-icons-fill-those-icons.png"/>0
                 </div>
                 </div>
              {% endfor %}

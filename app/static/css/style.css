@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Gideon+Roman&family=Rowdies&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Gideon+Roman&family=PT+Serif&family=Rowdies&display=swap');
 
 *{
-  font-family: 'Gideon Roman', cursive;
+  font-family: 'PT Serif', serif;
 }
 
 #puro{
@@ -56,4 +56,8 @@ img{
 }
 .form-con {
   width: 200px;
+}
+.btn-dark a{
+  color: white;
+  text-decoration: none;
 }

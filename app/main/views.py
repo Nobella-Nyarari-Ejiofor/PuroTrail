@@ -53,7 +53,7 @@ def login():
         # /loging the user in
         login_user(user)
         # redirecting to the pitch page
-        return redirect(url_for('main.pitches'))
+        return redirect(url_for('main.home'))
       
       return ("Invalid username or password")
     return("The username doesn't exist")
@@ -114,28 +114,6 @@ def pitches():
    db.session.commit()
  
   return render_template('pitches.html' , form =form )
-
-# @main.route('/pitches/comments/<id>/')
-# def pitchescomments(id):
-#    specific_pitch = Pitch.query.filter_by(id=id).first()
-#    form = CommentsForm
-#    if form.validate_on_submit():
-#      pitch_comments = form.comment_words.data
-#      pitched_comments_class = Comment(commentwords = pitch_comments , id = current_user.id)
-
-#      db.session.add(pitched_comments_class)
-#      db.session.commit()
-
-# #      return render_template('comments.html', form = form)
-
-# # , ,  summary_comments = Comment(commentwords = comment, )
-# @main.route('/pitches/comment')
-# @login_required
-# def comment():
-
-#   pitchy = Pitch.query.filter_by(id = id).first() 
-#   comments = Comment.query.filter_by(pitches_id = pitchy.id).all()
-#   return render_template('comments.html', comments = comments)
 
 @main.route('/comments/<id>', methods = ['GET','POST'])
 @login_required
