@@ -137,23 +137,22 @@ def pitches():
 #   comments = Comment.query.filter_by(pitches_id = pitchy.id).all()
 #   return render_template('comments.html', comments = comments)
 
-@main.route('/comments', methods = ['GET','POST'])
-def comment():
+@main.route('/comments/<id>', methods = ['GET','POST'])
+@login_required
+def comment(id):
+  """
+  A function that returns the comments form and displays the comments submitted
+  """
+  pitch = Pitch.query.filter_by(id=id).first()
+  comments = Comment.query.filter_by(pitches_id = id).all()
   form = CommentsForm()
   if form.validate_on_submit():
-    comments = form.comment_words.data
-    commented = Comment(commentwords = comments)
+    commentsdata = form.comment_words.data
+    commented = Comment(commentwords = commentsdata ,pitch = pitch )
 
     db.session.add(commented)
     db.session.commit()
-  return render_template('comments.html', form =form)
-
-# eturn render_template('comments.html', form = commentsform, comment = comment)
- 
-
-
-
-
+  return render_template('comments.html', pitch = pitch ,form =form ,comments = comments )
 
 @main.route('/category/<id>')
 @login_required

@@ -1,12 +1,22 @@
 {% extends 'base.html'%}
 {% import "bootstrap/wtf.html" as wtf %}
 {% block content %}
-<div class="form-control">
+<div class="form-control" action="/comment" methods="POST">
   {{wtf.quick_form(form)}}
 </div>
-<!-- {%if comments%}
-{%for comment in comments%}
-<p>{{comment.commentwords}}</p>
+<div>
+  <h3>Pitch:</h3>
+    {{pitch.pitchwords}}
+</div>
+<h3 class = " text-center">Comments</h3>
+{% if comments %}
+{% for comment in comments%}
+ <div class="card">
+   <div class="card-body">
+    {{comment.commentwords}}
+   </div>
+ </div>
+ 
 {% endfor %}
-{% endif %} -->
+{% endif %}
 {% endblock %}
