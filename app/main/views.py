@@ -4,7 +4,7 @@ from flask import render_template , redirect , url_for , flash , abort
 from .forms import LoginForm , SignUpForm , PitchesForm , CommentsForm
 from werkzeug.security import check_password_hash, generate_password_hash
 from ..models import User , Pitch , Category , Comment
-from flask_login import login_user , login_required , current_user
+from flask_login import login_user , login_required , current_user ,logout_user
 from ..email import mail_message
 
 
@@ -126,11 +126,34 @@ def pitches():
 
 # #      return render_template('comments.html', form = form)
 
-# #  commentsform = CommentsForm(), comment = commentsform.comment_words.data,  summary_comments = Comment(commentwords = comment, )
+# # , ,  summary_comments = Comment(commentwords = comment, )
+@main.route('/pitches/comment')
+@login_required
+def comment():
+
+  pitchy = Pitch.query.filter_by(id = id).first() 
+  comments = Comment.query.filter_by(pitches_id = pitchy.id).all()
+  return render_template('comments.html', comments = comments)
+
+
+
+#  if commentsform.validate_on_submit():
+#    comment = commentsform.comment_words.data
+
+
+    # return render_template('comments.html', form = commentsform, comment = comment)
+ 
+
+
+
+
 
 @main.route('/category/<id>')
 @login_required
 def pickup(id):
+  """
+  A function that returns pitches of a specific user by catgory
+  """
   
   category_specific = Category.query.filter_by(id = id).first() 
   pitches = Pitch.query.filter_by(category = category_specific).all()
@@ -146,8 +169,14 @@ def profileview(uname):
   A function to display users profile information
   """
   user = User.query.filter_by(username = uname).first()
-  pitches = Pitch.query.filter_by(user_id=id).all()
+  # pitches = Pitch.query.filter_by(user_id= user.id).all() - displays all the pitches by a user but will interfere with my UI
   
   if user is None:
     abort(404)
-  return render_template('otherpitches.html', user = user , pitches = pitches)
+  return render_template('otherpitches.html', user = user)
+
+@main.route('/logout')
+@login_required
+def logout():
+  logout_user()
+  return redirect(url_for('main.home'))
