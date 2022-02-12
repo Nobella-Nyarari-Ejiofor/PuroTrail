@@ -1,7 +1,5 @@
 import os
 
-from instance.config import SECRET_KEY 
-
 
 class Config:
   """
