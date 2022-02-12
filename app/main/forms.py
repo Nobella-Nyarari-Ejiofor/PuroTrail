@@ -3,6 +3,7 @@ from wtforms import StringField, TextAreaField,SubmitField, SelectField
 from wtforms.validators import InputRequired , Length , Email
 
 
+
 class LoginForm(FlaskForm):
   username = StringField('username' , validators = [InputRequired(), Length(min = 3 ,max =15)])
   password = StringField('password' , validators = [InputRequired(), Length(min = 3 ,max =15)])

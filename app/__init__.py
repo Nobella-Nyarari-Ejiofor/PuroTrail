@@ -1,5 +1,5 @@
 from flask import Flask
-from config import config_options
+from config import config_options,SECRET_KEY
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
@@ -23,7 +23,7 @@ def create_app(config_name):
   app = Flask(__name__)
 
   # The secret key
-  # app.config['SECRET_KEY'] = SECRET_KEY
+  SECRET_KEY = app.config['SECRET_KEY']
   # Creating the configurations for the app
   app.config.from_object(config_options[config_name])
 
