@@ -1,5 +1,3 @@
-from crypt import methods
-from re import template
 from . import main
 from app import db, login_manager
 from flask import render_template , redirect , url_for , flash , abort
@@ -52,6 +50,7 @@ def login():
       if check_password_hash(user.password,form.password.data):
         # /loging the user in
         login_user(user)
+        
         # redirecting to the pitch page
         return redirect(url_for('main.home'))
       
