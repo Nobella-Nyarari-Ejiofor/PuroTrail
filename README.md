@@ -127,7 +127,7 @@ SOFTWARE.
 ## Authors Info
 
 
-Gmail - [richard.omondi@student.moringaschool.com]()
+Gmail - [nobella.ejiofor@student.moringaschool.com]()
 
 Github - [NOBELLA EJIOFOR](https://github.com/Nobella-Nyarari-Ejiofor)
 
