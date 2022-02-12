@@ -18,13 +18,13 @@ class Config:
   MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
 
 class prodConfig(Config):
-   SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
+  SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
   
 
 class DevConfig(Config):
   DEBUG = True
 
 config_options = {
-  'developement' : DevConfig,
+  'development' : DevConfig,
   'production' : prodConfig
 }
