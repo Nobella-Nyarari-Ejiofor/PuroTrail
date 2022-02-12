@@ -5,7 +5,7 @@ from flask_migrate import Migrate, MigrateCommand
 
 # Creating app instance
 app=create_app('production')
-
+SECRET_KEY = '\x16\xf8\x15U\xe3\xe3\x86\xa6\xbdB\xc8\xe7\xba}iF\xccA\xc1[-\xe0\x85\x9d\xb7\x12,\x83\xf8DO\xf9'
 manager = Manager(app)
 manager.add_command('server' , Server)
 
