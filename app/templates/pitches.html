@@ -5,7 +5,7 @@
   <div class="container-fluid" ></div>
      <div class=" pt-5 mt-5" >
      <form class="form-control" action="/pitches" method="POST">
-      {{ form.hidden_tag() }}
+      {{ form.csrf_token }}
       {{wtf.quick_form(form)}}
      </form>
       
