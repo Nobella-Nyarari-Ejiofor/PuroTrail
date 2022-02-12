@@ -5,7 +5,7 @@ class Config:
   Defining the configuration parent class
   """
   SECRET_KEY = os.urandom(32)
-  SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:access@localhost/putotrial'
+  
 
    # email configurations
   MAIL_SERVER = 'smtp.googlemail.com'
@@ -19,6 +19,7 @@ class prodConfig(Config):
   
 
 class DevConfig(Config):
+  SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:access@localhost/putotrial'
   DEBUG = True
 
 config_options = {
