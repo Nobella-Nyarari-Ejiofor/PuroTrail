@@ -1,11 +1,10 @@
 import os
 
-
 class Config:
   """
   Defining the configuration parent class
   """
-  SECRET_KEY = 'nobella1234'
+  SECRET_KEY = os.urandom(32)
   SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:access@localhost/putotrial'
 
    # email configurations
