@@ -31,11 +31,11 @@ This is an application that allows a user to view the pitches of other users by 
 
 * Open Terminal `ctrl+Alt+T`
 
-* Git clone https://github.com/RichieOrito/pitchIdea.git
+* Git clone https://github.com/Nobella-Nyarari-Ejiofor/PuroTrail
 
 or
 
-* Git fork - Enter into your own repository and search-https://github.com/RichieOrito/pitchIdea then click on fork to add
+* Git fork - Enter into your own repository and search-https://github.com/Nobella-Nyarari-Ejiofor/PuroTrail then click on fork to add
 it on your own repository.
 
  Navigate into the cloned project. 
@@ -96,7 +96,7 @@ $ pip install -r requirements.txt
 * W3schools
 * stackOverFlow
 
-[Go Back to the top](#pitchIdea)
+[Go Back to the top](#purotrail)
 
 ## Licence
 
@@ -126,8 +126,6 @@ SOFTWARE.
 
 ## Authors Info
 
-
-Linked - [Richard Orito](https://www.linkedin.com/in/richie-orito/)
 
 Gmail - [richard.omondi@student.moringaschool.com]()
 
