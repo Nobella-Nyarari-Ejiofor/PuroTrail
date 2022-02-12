@@ -1,5 +1,5 @@
 from . import main
-from app import db, login_manager
+from app import db, login_manager,csrf
 from flask import render_template , redirect , url_for , flash , abort
 from .forms import LoginForm , SignUpForm , PitchesForm , CommentsForm
 from werkzeug.security import check_password_hash, generate_password_hash
